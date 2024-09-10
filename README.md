@@ -20,7 +20,7 @@ This project is an ASP.NET Core MVC CRUD application using Entity Framework Core
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/MerttMetinn/ASP.NET-Core-MVC-CRUD-Operations.git
    ```
 2. **Open the project** in Visual Studio 2022.
 3. **Install the required EF Core packages**:
