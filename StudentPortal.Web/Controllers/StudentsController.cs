@@ -14,27 +14,33 @@ namespace StudentPortal.Web.Controllers
         {
             this.dbContext = dbContext;
         }
+
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Add(AddStudentViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
             var student = new Student
             {
                 Name = viewModel.Name,
                 Email = viewModel.Email,
                 Phone = viewModel.Phone,
                 Subscribed = viewModel.Subscribed
-
             };
 
             await dbContext.Students.AddAsync(student);
             await dbContext.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction("List");
         }
 
         [HttpGet]
@@ -42,6 +48,54 @@ namespace StudentPortal.Web.Controllers
         {
             var students = await dbContext.Students.ToListAsync();
             return View(students);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var student = await dbContext.Students.FindAsync(id);
+            if (student is null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Student viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var student = await dbContext.Students.FindAsync(viewModel.Id);
+
+            if (student is not null)
+            {
+                student.Name = viewModel.Name;
+                student.Email = viewModel.Email;
+                student.Phone = viewModel.Phone;
+                student.Subscribed = viewModel.Subscribed;
+
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var student = await dbContext.Students.FindAsync(id);
+
+            if (student is not null)
+            {
+                dbContext.Students.Remove(student);
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("List");
         }
     }
 }
