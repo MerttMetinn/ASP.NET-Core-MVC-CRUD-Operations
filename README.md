@@ -35,7 +35,15 @@ This project is an ASP.NET Core MVC CRUD application using Entity Framework Core
 
 1. **Run the application** using Visual Studio or the `dotnet run` command.
 2. The CRUD operations can be performed on the model entity, allowing for Create, Read, Update, and Delete functionalities.
-   
+
+### Screenshots
+
+- **Add Student Page:**
+![Add Student Page:](https://github.com/user-attachments/assets/229bb16f-9d76-45d7-8999-04e4b88190bc)
+
+- **Student List Page:**
+![Student List Page:](https://github.com/user-attachments/assets/be899a0a-67e4-40b6-b19c-1cac99e64ca1)
+
 ### Contributing
 
 Feel free to submit issues or pull requests. For significant changes, please open an issue first to discuss what you would like to change.
